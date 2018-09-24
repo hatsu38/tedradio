@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  summary: MyText
+  sentence: MyText
+  thumbnail: MyString
+  hp: MyString
+  taketime: 2018-09-24 19:50:32
+  data: 2018-09-24 19:50:32
+  bigcategory: one
+  smallcategory: one
+  speaker: one
+
+two:
+  title: MyString
+  summary: MyText
+  sentence: MyText
+  thumbnail: MyString
+  hp: MyString
+  taketime: 2018-09-24 19:50:32
+  data: 2018-09-24 19:50:32
+  bigcategory: two
+  smallcategory: two
+  speaker: two

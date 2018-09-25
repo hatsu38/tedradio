@@ -1,0 +1,9 @@
+<h1>Talks#index</h1>
+<% @bigcategories.each do |bigcategory| %>
+  <%= bigcategory.name %>
+  <ul>
+  <% bigcategory.talks[0..2].each do |talk| %>
+    <li><%= link_to talk.title ,talk_path(talk) %></li>
+  <% end %>
+  </ul>
+<% end %>

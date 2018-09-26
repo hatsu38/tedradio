@@ -1,0 +1,10 @@
+<h1>Categories#index</h1>
+
+<% @categories.each do |category| %>
+  <%= link_to category.name,category_path(category) %>
+  <ul>
+  <% category.smallcategories.each do |sub_category| %>
+    <li><%= sub_category.name %></li>
+  <% end %>
+  </ul>
+<% end %>

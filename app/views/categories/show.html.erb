@@ -1,0 +1,6 @@
+<h1>Categories#show</h1>
+<ul>
+<% @category.smallcategories.each do |sub_category| %>
+  <li><%= sub_category.name %></li>
+<% end %>
+</ul>

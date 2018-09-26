@@ -1,0 +1,6 @@
+<h1>Subcategories#show</h1>
+<ul>
+<% @subcategory.talks.each do |talk| %>
+  <li><%= link_to talk.title, talk_path(talk) %></li>
+<% end %>
+</ul>

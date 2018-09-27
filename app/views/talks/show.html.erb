@@ -30,7 +30,7 @@
 
 <section id="relation_talk" class="talks_block row">
   <h2 class="relation_title">関連トーク</h2>
-  <% @talk.smallcategory.talks[0..9].each do |talk| %>
+  <% @talk.smallcategory.talks.order("RANDOM()")[0..9].each do |talk| %>
     <div class="talk_block col s6">
       <div class="talk_thumnbnail_cover">
         <%= image_tag(talk.thumbnail) %>

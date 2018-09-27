@@ -8,7 +8,7 @@
           </span>
         </h2>
       <div class="talks_block row">
-        <% category.talks[0..3].each do |talk| %>
+        <% category.talks.order("RANDOM()")[0..3].each do |talk| %>
           <div class="talk_block col s6">
             <div class="talk_thumnbnail_cover">
               <%= image_tag(talk.thumbnail) %>

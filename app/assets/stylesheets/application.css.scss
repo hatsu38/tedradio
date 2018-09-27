@@ -28,6 +28,75 @@ header{
     }
   }
 }
+footer{
+  h2{
+    color:#4a4949;
+    text-align:center;
+    margin:45px auto 6px;
+    font-size:28px;
+    font-weight:bold;
+  }
+  .footer_border_top{
+    width:85%;
+    height:3px;
+    background:#555;
+    margin: 0 auto;
+  }
+  .sns_block{
+    text-align:center;
+    width: 60%;
+    margin: 0 auto;
+    font-size:2em;
+    margin-top:.8em;
+    .sns{
+      border-radius:5px;
+      display:block;
+        color: #fff;
+    }
+    .twitter{
+      background-color: #74c1f8;
+    }
+    .facebook{
+      background-color:#668ad8;
+    }
+    .hatena{
+      background-color:#6eaff3;
+    }
+  }
+  .info_block{
+    margin:1.2em auto 0;
+    text-align:center;
+    width:60%;
+    a{
+      margin-right:3px;
+      color: #555;
+      i{
+        margin-right:2px;
+      }
+    }
+  }
+  .footer_copy{
+    font-size:12px;
+    text-align:center;
+    margin: .5em auto;
+  }
+}
+.sort_top_btn{
+  position:fixed;
+  bottom:.5rem;
+  left:.5rem;
+  font-size: 1.5rem;
+  line-height: 3.8rem;
+  .fa-circle{
+    color:#6b7ee5;
+  }
+  .fa-sort-up{
+    color:#fff;
+    font-size:2.2rem;
+  }
+}
+
+
 // サムネイルのCSS
 .talk_thumnbnail_cover{
   position:relative;

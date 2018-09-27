@@ -1,6 +1,6 @@
 class TalksController < ApplicationController
   def index
-    @bigcategories = Bigcategory.all
+    @bigcategories = Bigcategory.order("RANDOM()")
   end
 
   def show

@@ -1,1 +1,139 @@
-<h1><%= @talk.title %></h1>
+<section id="show">
+  <div class="talk_thumnbnail_cover">
+    <%= image_tag @talk.thumbnail %>
+    <span id="start_btn" class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
+    <span id="resume_btn" class="resume_radio_btn"><i class="fas fa-play fa-2x"></i></span>
+    <span id="stop_btn" class="stop_radio_btn"><i class="fas fa-equals fa-2x fa-rotate-90"></i></span>
+    <span id="pass_time" class="now_time">00:00</span>
+    <span class="take_time"><%= @talk.taketime.strftime("%H:%M") %></span>
+  </div>
+  <div class="talk_info">
+    <h2><%= @talk.title %></h2>
+    <%= @talk.speaker.name %>
+    <%= @talk.date.strftime("%Y/%m/%d") %>
+    <%= @talk.bigcategory.name %>
+    <%= @talk.smallcategory.name %>
+  </div>
+  <div class="summary container">
+    <%= simple_format(@talk.summary) %>
+  </div>
+  <div id="sentence" class="sentence container">
+    <%= simple_format(@talk.sentence) %>
+  </div>
+</section>
+
+<section id="relation_talk" class="talks_block row">
+  <% @talk.smallcategory.talks[0..9].each do |talk| %>
+    <div class="talk_block col s6">
+      <div class="talk_thumnbnail_cover">
+        <%= image_tag(talk.thumbnail) %>
+        <span class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
+        <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+      </div>
+      <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+      <br>
+      <%= link_to talk.title ,talk_path(talk) %>
+    </div>
+  <% end %>
+</section>
+
+    <script>
+$(function() {
+  var start = new Date();
+  // 初期化
+  var hour = 0;
+  var min = 0;
+  var sec = 0;
+  var now = 0;
+  var datet = 0;
+
+  // 準備 $voicesを取得したいだけなのだけれども
+  $voise        = null;
+  $voiseName    = 'Google 日本語';
+  $voices       = speechSynthesis.getVoices();
+  $synthes      = new SpeechSynthesisUtterance();
+
+  // SpeechSynthesisUtterance()に時間かかるから様子みる
+  $repeat  = setInterval(function() {
+    if($synthes){
+      $voices  = speechSynthesis.getVoices();
+      clearInterval($repeat);
+    }
+  }, 300);
+
+  // 読み上げ
+  function say(msg){
+    $voise = $.grep($voices, function(n, i){return n.name == $voiseName})[0];
+    $synthes.voice = $voise;                  // 音声の設定
+    $synthes.rate = 1.2;
+    speechSynthesis.cancel();                 // かぶった読み停止
+    $synthes.text  = msg;                     // 読む内容
+    // $synthes.lang = 'ja-JP';
+    speechSynthesis.speak($synthes);          // 喋れ
+    console.log(msg);
+  }
+
+  function stop($synthes){
+    speechSynthesis.pause($synthes);
+  }
+
+  function resume($synthes){
+    speechSynthesis.resume($synthes);
+  }
+
+  function count_timer(){
+    now = new Date();
+    datet = parseInt((now.getTime() - start.getTime()) / 1000);
+    hour = parseInt(datet / 3600);
+    min = parseInt((datet / 60) % 60);
+    sec = datet % 60;
+    // 数値が1桁の場合、頭に0を付けて2桁で表示する指定
+    if(hour < 10) { hour = "0" + hour; }
+    if(min < 10) { min = "0" + min; }
+    if(sec < 10) { sec = "0" + sec; }
+    console.log(min);
+    console.log(sec);
+    $("#pass_time").text(min + ':' + sec)
+    setTimeout("count_timer()", 1000);
+  }
+  // ボタン動作
+  $('#start_btn').on('click',function(){
+    $(this).hide();
+    $("#stop_btn").show();
+    count_timer();
+    var i = 0;
+    var last_say_num = $("#sentence p").length;
+    console.log(last_say_num);
+    say($("#sentence p").eq(i).text());
+    $synthes.onend = function (event) {
+      if(i == last_say_num){
+        return false;
+      }
+      i++;
+      say($("#sentence p").eq(i).text());
+      $synthes.onend;
+    };
+  });
+
+  $(function () {
+    var ted_sentence = $("#sentence").html();
+    var sentence_fixed = ted_sentence.replace(/。/g, "。</p><p>");
+    $("#sentence").html(sentence_fixed);
+  });
+
+
+
+$("#stop_btn").on('click',function(){
+  stop($synthes);
+  $(this).hide();
+  $("#resume_btn").show();
+});
+
+  $("#resume_btn").on('click',function(){
+    resume($synthes);
+    $(this).hide();
+    $("#stop_btn").show();
+  });
+});
+    </script>
+

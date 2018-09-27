@@ -19,18 +19,61 @@ body{
 header{
   background-color:#333;
   h1{
-    color:#fff;
     font-size:1.8rem;
     line-height:3rem;
     text-align:center;
     margin:0;
+    a{
+      color:#fff;
+    }
+  }
+}
+// サムネイルのCSS
+.talk_thumnbnail_cover{
+  position:relative;
+  img{
+    max-width:100%;
+  }
+  .start_radio_btn,.stop_radio_btn,.resume_radio_btn{
+    width:100%;
+    position:absolute;
+    top:40%;
+    text-align:center;
+    color:#fff;
+  }
+  .stop_radio_btn,.resume_radio_btn{
+    display:none;
+  }
+  .take_time{
+    position:absolute;
+    bottom:.5rem;
+    right:.5rem;
+    color:#fff;
+    font-size:.9rem;
+  }
+  .now_time{
+    position:absolute;
+    bottom:.5rem;
+    color:#fff;
+    font-size:.9rem;
+    left:.5rem;
+  }
+}
+// 2カラムのトーク一覧
+.talks_block{
+  .talk_block{
+    height:240px;
+    a{
+    }
   }
 }
 
+// Topページ
 #top{
   .category_talk_block{
     h2{
       font-size:2rem;
+      margin:.5rem;
       a{
         color:#333;
       }
@@ -41,32 +84,20 @@ header{
         }
       }
     }
-    .talks_block{
-      .talk_block{
-        height:240px;
-        .talk_thumnbnail_cover{
-          position:relative;
-          img{
-            max-width:100%;
-          }
-          .start_radio_btn{
-            position:absolute;
-            top:40%;
-            left:45%;
-            color:#fff;
-          }
-          .take_time{
-            position:absolute;
-            bottom:.5rem;
-            right:.5rem;
-            color:#fff;
-            font-size:.9rem;
-          }
-        }
-        a{
-        }
-      }
-    }
+  }
+}
+
+#show{
+  img{
+    max-width:100%;
+  }
+  h2{
+    font-size:1.5rem;
+    margin:.5rem;
+  }
+  .sentence{
+    height:500px;
+    overflow-y:scroll;
   }
 }
 

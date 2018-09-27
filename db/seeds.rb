@@ -36,6 +36,7 @@ CSV.foreach(talk_csv, headers: true) do |data|
   Talk.create(
     title: data[2],
     summary: data[3],
+    sentence: data[11],
     thumbnail: data[4],
     hp: data[5],
     taketime: data[6],

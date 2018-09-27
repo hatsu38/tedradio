@@ -1,9 +1,26 @@
-<h1>Talks#index</h1>
-<% @bigcategories.each do |category| %>
-  <%= link_to category.name, category_path(category) %>
-  <ul>
-  <% category.talks[0..2].each do |talk| %>
-    <li><%= link_to talk.title ,talk_path(talk) %></li>
+<section id="top">
+  <% @bigcategories.each do |category| %>
+    <div class="category_talk_block">
+        <h2 class="category_title">
+          <%= link_to category.name, category_path(category) %>
+          <span class="to_category_page">
+            <%= link_to "もっと見る", category_path(category) %>
+          </span>
+        </h2>
+      <div class="talks_block row">
+        <% category.talks[0..3].each do |talk| %>
+          <div class="talk_block col s6">
+            <div class="talk_thumnbnail_cover">
+              <%= image_tag(talk.thumbnail) %>
+              <span class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
+              <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+            </div>
+            <%= talk.speaker.name %>
+            <br>
+            <%= link_to talk.title ,talk_path(talk) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-  </ul>
-<% end %>
+</section>

@@ -1,0 +1,72 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+body{
+  margin:0;
+}
+header{
+  background-color:#333;
+  h1{
+    color:#fff;
+    font-size:1.8rem;
+    line-height:3rem;
+    text-align:center;
+    margin:0;
+  }
+}
+
+#top{
+  .category_talk_block{
+    h2{
+      font-size:2rem;
+      a{
+        color:#333;
+      }
+      .to_category_page{
+        font-size:1rem;
+        a{
+          color:#039be5;
+        }
+      }
+    }
+    .talks_block{
+      .talk_block{
+        height:240px;
+        .talk_thumnbnail_cover{
+          position:relative;
+          img{
+            max-width:100%;
+          }
+          .start_radio_btn{
+            position:absolute;
+            top:40%;
+            left:45%;
+            color:#fff;
+          }
+          .take_time{
+            position:absolute;
+            bottom:.5rem;
+            right:.5rem;
+            color:#fff;
+            font-size:.9rem;
+          }
+        }
+        a{
+        }
+      }
+    }
+  }
+}
+

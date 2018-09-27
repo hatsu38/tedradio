@@ -3,7 +3,7 @@
     <div class="category_talk_block">
         <h2 class="category_title">
           <%= link_to category.name, category_path(category) %>
-          <span class="to_category_page">
+          <span class="to_category_page right">
             <%= link_to "もっと見る", category_path(category) %>
           </span>
         </h2>
@@ -14,8 +14,13 @@
               <%= image_tag(talk.thumbnail) %>
               <span class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
               <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+              <div id="pass_time" class="now_time">
+                <span id="pass_min">00</span>:<span id="pass_sec">00</span>
+              </div>
             </div>
-            <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+            <span class="speaker_name">
+              <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+            </span>
             <br>
             <%= link_to talk.title ,talk_path(talk) %>
           </div>

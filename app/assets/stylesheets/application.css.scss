@@ -84,6 +84,11 @@ header{
         }
       }
     }
+    .speaker_name{
+      a{
+        color:#333;
+      }
+    }
   }
 }
 
@@ -95,9 +100,25 @@ header{
     font-size:1.5rem;
     margin:.5rem;
   }
+  .summary{
+    clear:both;
+  }
   .sentence{
     height:500px;
     overflow-y:scroll;
   }
+  .categories_name{
+    .chip{
+      font-size:.5rem;
+      padding:0 .5rem;
+      height:auto;
+      line-height:2rem;
+    }
+  }
 }
-
+#relation_talk{
+  .relation_title{
+    font-size:1.5rem;
+    text-align:center;
+  }
+}

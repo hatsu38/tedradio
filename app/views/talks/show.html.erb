@@ -4,15 +4,21 @@
     <span id="start_btn" class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
     <span id="resume_btn" class="resume_radio_btn"><i class="fas fa-play fa-2x"></i></span>
     <span id="stop_btn" class="stop_radio_btn"><i class="fas fa-equals fa-2x fa-rotate-90"></i></span>
-    <span id="pass_time" class="now_time">00:00</span>
+    <div id="pass_time" class="now_time">
+      <span id="pass_min">00</span>:<span id="pass_sec">00</span>
+    </div>
     <span class="take_time"><%= @talk.taketime.strftime("%H:%M") %></span>
   </div>
   <div class="talk_info">
     <h2><%= @talk.title %></h2>
-    <%= @talk.speaker.name %>
-    <%= @talk.date.strftime("%Y/%m/%d") %>
-    <%= @talk.bigcategory.name %>
-    <%= @talk.smallcategory.name %>
+    <div class="container">
+      <%= @talk.speaker.name %>
+      <span class="right"><%= @talk.date.strftime("%Y/%m/%d") %></span>
+    </div>
+    <div class="categories_name right">
+      <div class="chip"><%= @talk.bigcategory.name %></div>
+      <div class="chip"><%= @talk.smallcategory.name %></div>
+    </div>
   </div>
   <div class="summary container">
     <%= simple_format(@talk.summary) %>
@@ -23,6 +29,7 @@
 </section>
 
 <section id="relation_talk" class="talks_block row">
+  <h2 class="relation_title">関連トーク</h2>
   <% @talk.smallcategory.talks[0..9].each do |talk| %>
     <div class="talk_block col s6">
       <div class="talk_thumnbnail_cover">
@@ -37,16 +44,11 @@
   <% end %>
 </section>
 
-    <script>
+<script>
 $(function() {
-  var start = new Date();
-  // 初期化
-  var hour = 0;
-  var min = 0;
   var sec = 0;
-  var now = 0;
-  var datet = 0;
-
+  var min = 0;
+  var timer = 0;
   // 準備 $voicesを取得したいだけなのだけれども
   $voise        = null;
   $voiseName    = 'Google 日本語';
@@ -80,27 +82,28 @@ $(function() {
   function resume($synthes){
     speechSynthesis.resume($synthes);
   }
-
-  function count_timer(){
-    now = new Date();
-    datet = parseInt((now.getTime() - start.getTime()) / 1000);
-    hour = parseInt(datet / 3600);
-    min = parseInt((datet / 60) % 60);
-    sec = datet % 60;
-    // 数値が1桁の場合、頭に0を付けて2桁で表示する指定
-    if(hour < 10) { hour = "0" + hour; }
-    if(min < 10) { min = "0" + min; }
-    if(sec < 10) { sec = "0" + sec; }
-    console.log(min);
-    console.log(sec);
-    $("#pass_time").text(min + ':' + sec)
-    setTimeout("count_timer()", 1000);
+  function pass_count(){
+    if(sec< 10){
+      $("#pass_sec").text("0"+parseInt(sec));
+    }else{
+      $("#pass_sec").text(parseInt(sec));
+    }
+    if(min< 10){
+      $("#pass_min").text("0"+parseInt(min));
+    }else{
+      $("#pass_min").text(parseInt(min));
+    }
+    sec++;
+    if(sec == 60){
+      sec = 0;
+      min++;
+    };
   }
   // ボタン動作
   $('#start_btn').on('click',function(){
     $(this).hide();
     $("#stop_btn").show();
-    count_timer();
+    timer = setInterval(pass_count,1000);
     var i = 0;
     var last_say_num = $("#sentence p").length;
     console.log(last_say_num);
@@ -118,22 +121,24 @@ $(function() {
   $(function () {
     var ted_sentence = $("#sentence").html();
     var sentence_fixed = ted_sentence.replace(/。/g, "。</p><p>");
+    var sentence_fixed = sentence_fixed.replace(/？/g, "？</p><p>");
+    var sentence_fixed = sentence_fixed.replace(/」/g, "」</p><p>");
     $("#sentence").html(sentence_fixed);
   });
 
-
-
-$("#stop_btn").on('click',function(){
-  stop($synthes);
-  $(this).hide();
-  $("#resume_btn").show();
-});
+  $("#stop_btn").on('click',function(){
+    stop($synthes);
+    clearInterval(timer);
+    $(this).hide();
+    $("#resume_btn").show();
+  });
 
   $("#resume_btn").on('click',function(){
     resume($synthes);
+    timer = setInterval(pass_count,1000);
     $(this).hide();
     $("#stop_btn").show();
   });
 });
-    </script>
+</script>
 

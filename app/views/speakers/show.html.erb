@@ -1,0 +1,5 @@
+<h1>Speakers#show</h1>
+<%= @speaker.name %>
+<% @speaker.talks.each do |talk| %>
+  <%= talk.title %>
+<% end %>

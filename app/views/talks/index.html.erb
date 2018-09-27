@@ -15,7 +15,7 @@
               <span class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
               <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
             </div>
-            <%= talk.speaker.name %>
+            <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
             <br>
             <%= link_to talk.title ,talk_path(talk) %>
           </div>

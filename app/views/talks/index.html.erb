@@ -12,20 +12,20 @@
           <div class="talk_block col s6">
             <div class="talk_thumnbnail_cover">
               <%= image_tag(talk.thumbnail) %>
-              <span class="start_radio_btn <%= talk.id %>_start_btn" data-talk_id="<%= talk.id %>"><i class="fas fa-play fa-2x"></i></span>
-              <span class="resume_radio_btn <%= talk.id %>_resume_btn" data-talk_id="<%= talk.id %>"><i class="fas fa-play fa-2x"></i></span>
-              <span class="stop_radio_btn <%= talk.id %>_stop_btn" data-talk_id="<%= talk.id %>"><i class="fas fa-equals fa-2x fa-rotate-90"></i></span>
+              <!-- <span class="start_radio_btn <%#= talk.id %>_start_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
+              <!-- <span class="resume_radio_btn <%#= talk.id %>_resume_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
+              <!-- <span class="stop_radio_btn <%#= talk.id %>_stop_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;equals fa&#45;2x fa&#45;rotate&#45;90"></i></span> -->
               <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
-              <div class="now_time">
-                <span class="<%= talk.id %>_pass_min">00</span>:<span class="<%= talk.id %>_pass_sec">00</span>
-              </div>
+              <!-- <div class="now_time"> -->
+              <!--   <span class="<%#= talk.id %>_pass_min">00</span>:<span class="<%#= talk.id %>_pass_sec">00</span> -->
+              <!-- </div> -->
             </div>
+            <!-- <div class="hidden_sentence" id="<%#= talk.id %>_sentence"><%#= simple_format(talk.sentence) %></div> -->
             <span class="speaker_name">
               <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
             </span>
             <br>
             <%= link_to talk.title ,talk_path(talk) %>
-            <div class="hidden_sentence <%= talk.id %>_sentence"><%= simple_format(talk.sentence) %></div>
           </div>
         <% end %>
       </div>
@@ -73,14 +73,14 @@ $(function() {
   }
   function pass_count(talk_id){
     if(sec< 10){
-      $("." + talk_id + "_pass_sec").text("0"+parseInt(sec));
+      $(`.${talk_id}_pass_sec`).text("0"+parseInt(sec));
     }else{
-      $("." + talk_id + "_pass_sec").text(parseInt(sec));
+      $(`.${talk_id}_pass_sec`).text(parseInt(sec));
     }
     if(min< 10){
-      $("." + talk_id + "_pass_min").text("0"+parseInt(min));
+      $(`.${talk_id}_pass_min`).text("0"+parseInt(min));
     }else{
-      $("." + talk_id + "_pass_min").text(parseInt(min));
+      $(`.${talk_id}_pass_min`).text(parseInt(min));
     }
     sec++;
     if(sec == 60){
@@ -90,47 +90,52 @@ $(function() {
   }
   // ボタン動作
   $('.start_radio_btn').on('click',function(){
-    var talk_id = $(this).attr("data-talk_id");
+    var talk_str = $(this).attr("data-talk_id");
+    var talk_id = Number(talk_str);
     console.log(talk_id);
     $(this).hide();
-    $("." + talk_id + "_stop_btn").show();
+    $(`.${talk_id}_stop_btn`).show();
     timer = setInterval(pass_count(talk_id),1000);
     var i = 0;
-    var last_say_num = $("."+ talk_id + "_sentence p").length;
-    console.log("."+ talk_id + "_sentence p");
-    say($("."+ talk_id + "_sentence p").eq(i).text());
+    console.log($(this).parent("div").next("div").text());
+    // console.log($(`#${talk_id}_sentence`).text());
+    var last_say_num = $(`#${talk_id}_sentence p`).length;
+    console.log($(`#${talk_id}_sentence p`).eq(i).text());
+    say($(`#${talk_id}_sentence p`).eq(i).text());
     $synthes.onend = function (event) {
       if(i == last_say_num){
         return false;
       }
       i++;
-      say($("."+ talk_id + "_sentence p").eq(i).text());
+      say($(`#${talk_id}_sentence p`).eq(i).text());
       $synthes.onend;
     };
   });
-
-  $(function () {
-    var ted_sentence = $(".hidden_sentence").html();
-    var sentence_fixed = ted_sentence.replace(/。/g, "。</p><p>");
-    var sentence_fixed = sentence_fixed.replace(/？/g, "？</p><p>");
-    var sentence_fixed = sentence_fixed.replace(/」/g, "」</p><p>");
-    $(".hidden_sentence").html(sentence_fixed);
-  });
+  //
+  // $(function () {
+  //   var ted_sentence = $(".hidden_sentence").html();
+  //   var sentence_fixed = ted_sentence.replace(/。/g, "。</p><p>");
+  //   var sentence_fixed = sentence_fixed.replace(/？/g, "？</p><p>");
+  //   var sentence_fixed = sentence_fixed.replace(/」/g, "」</p><p>");
+  //   $(".hidden_sentence").html(sentence_fixed);
+  // });
 
   $(".stop_radio_btn").on('click',function(){
-    var talk_id = $(this).attr("data-talk_id");
+    var talk_str = $(this).attr("data-talk_id");
+    var talk_id = Number(talk_str);
     stop($synthes);
     clearInterval(timer);
     $(this).hide();
-    $("." + talk_id + "_resume_btn").show();
+    $(`.${talk_id}_resume_btn`).show();
   });
 
   $(".resume_radio_btn").on('click',function(){
-    var talk_id = $(this).attr("data-talk_id");
+    var talk_str = $(this).attr("data-talk_id");
+    var talk_id = Number(talk_str);
     resume($synthes);
     timer = setInterval(pass_count(talk_id),1000);
     $(this).hide();
-    $("." + talk_id + "_stop_btn").show();
+    $(`.${talk_id}_stop_btn`).show();
   });
 });
 </script>

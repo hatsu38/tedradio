@@ -153,9 +153,14 @@ footer{
         }
       }
     }
-    .speaker_name{
-      a{
-        color:#333;
+    .talk_block{
+      .hidden_sentence{
+        display:none;
+      }
+      .speaker_name{
+        a{
+          color:#333;
+        }
       }
     }
   }

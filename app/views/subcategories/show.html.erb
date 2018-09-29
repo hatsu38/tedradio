@@ -1,6 +1,20 @@
-<h1>Subcategories#show</h1>
-<ul>
-<% @subcategory.talks.each do |talk| %>
-  <li><%= link_to talk.title, talk_path(talk) %></li>
-<% end %>
-</ul>
+<section id="sub_category_page">
+  <h2><%= @subcategory.name %></h2>
+  <ul class="row">
+    <% @subcategory.talks.each do |talk| %>
+      <div class="talks_block col s6">
+        <div class="talk_block">
+          <div class="talk_thumnbnail_cover">
+            <%= image_tag(talk.thumbnail) %>
+            <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+          </div>
+          <span class="speaker_name">
+            <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+          </span>
+          <br>
+          <%= link_to talk.title ,talk_path(talk) %>
+        </div>
+      </div>
+    <% end %>
+  </ul>
+</section>

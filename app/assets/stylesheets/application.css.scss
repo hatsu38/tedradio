@@ -138,7 +138,7 @@ footer{
 }
 
 // Topページ
-#top{
+#top,#category_page,#sub_category_page{
   .category_talk_block{
     h2{
       font-size:2rem;
@@ -194,5 +194,11 @@ footer{
   .relation_title{
     font-size:1.5rem;
     text-align:center;
+  }
+}
+#sub_category_page{
+  h2{
+    font-size:2rem;
+    margin:.5rem;
   }
 }

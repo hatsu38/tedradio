@@ -1,5 +1,5 @@
 <section id="show">
-  <div class="talk_thumnbnail_cover">
+  <div class="talk_thumbnail_cover">
     <%= image_tag @talk.thumbnail %>
     <span id="start_btn" class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
     <span id="resume_btn" class="resume_radio_btn"><i class="fas fa-play fa-2x"></i></span>
@@ -32,9 +32,9 @@
   <h2 class="relation_title">関連トーク</h2>
   <% @talk.smallcategory.talks.order("RANDOM()")[0..9].each do |talk| %>
     <div class="talk_block col s6">
-      <div class="talk_thumnbnail_cover">
+      <div class="talk_thumbnail_cover">
         <%= image_tag(talk.thumbnail) %>
-        <span class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
+        <!-- <span class="start_radio_btn"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
         <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
       </div>
       <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>

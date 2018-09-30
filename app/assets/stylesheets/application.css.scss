@@ -19,8 +19,8 @@ body{
 header{
   background-color:#333;
   h1{
-    font-size:1.8rem;
-    line-height:3rem;
+    font-size:2.1rem;
+    line-height:3.3rem;
     text-align:center;
     margin:0;
     a{
@@ -138,11 +138,14 @@ footer{
 }
 
 // Topページ
-#top,#category_page,#sub_category_page{
+#top,#category_page,#sub_category_page,#speaker{
   .category_talk_block{
     h2{
-      font-size:2rem;
-      margin:.5rem;
+      font-size:1.6rem;
+      margin:.5rem .5rem .7rem;
+      &:first-child{
+        margin-top:1.5rem;
+      }
       a{
         color:#333;
       }
@@ -172,7 +175,7 @@ footer{
     width:100%;
   }
   h2{
-    font-size:1.5rem;
+    font-size:1.6rem;
     margin:.5rem;
   }
   .summary{
@@ -197,9 +200,9 @@ footer{
     text-align:center;
   }
 }
-#sub_category_page{
+#sub_category_page,#speaker_page{
   h2{
-    font-size:2rem;
+    font-size:1.6rem;
     margin:.5rem;
   }
 }

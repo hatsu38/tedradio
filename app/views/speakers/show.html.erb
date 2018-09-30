@@ -1,5 +1,20 @@
-<h1>Speakers#show</h1>
-<%= @speaker.name %>
-<% @speaker.talks.each do |talk| %>
-  <%= talk.title %>
-<% end %>
+<section id="speaker_page">
+  <h2><%= @speaker.name %></h2>
+  <ul class="row">
+    <% @speaker.talks.each do |talk| %>
+      <div class="talks_block col s6">
+        <div class="talk_block">
+          <div class="talk_thumnbnail_cover">
+            <%= image_tag(talk.thumbnail) %>
+            <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+          </div>
+          <span class="speaker_name">
+            <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+          </span>
+          <br>
+          <%= link_to talk.title ,talk_path(talk) %>
+        </div>
+      </div>
+    <% end %>
+  </ul>
+</section>

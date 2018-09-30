@@ -98,19 +98,21 @@ footer{
 
 
 // サムネイルのCSS
-.talk_thumbnail_cover{
+.talk_thumnbnail_cover{
   position:relative;
   max-width:100%;
   img{
     max-width:100%;
   }
   .start_radio_btn,.stop_radio_btn,.resume_radio_btn{
-    width:100%;
-    max-width:100%;
     position:absolute;
     top:40%;
+    right:45%;
     text-align:center;
+    background-color:rgba(0,0,0,.5);
     color:#fff;
+    border-radius:50%;
+    padding:13px 13px 13px 18px;
   }
   .stop_radio_btn,.resume_radio_btn{
     display:none;

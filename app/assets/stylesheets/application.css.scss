@@ -170,6 +170,7 @@ footer{
 }
 
 #show{
+  padding-bottom:.5rem;
   img{
     max-width:100%;
     width:100%;
@@ -198,6 +199,9 @@ footer{
   .relation_title{
     font-size:1.5rem;
     text-align:center;
+    margin:.8rem;
+    font-weight:bold;
+    letter-spacing:2px;
   }
 }
 #sub_category_page,#speaker_page{

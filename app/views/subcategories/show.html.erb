@@ -1,5 +1,7 @@
 <section id="sub_category_page">
-  <h2><%= @subcategory.name %></h2>
+  <h2 class="page_title"><%= @subcategory.name %>
+  <br><span>(<%= @subcategory.talks.count %>件)</span>
+  </h2>
   <ul class="row">
     <% @subcategory.talks.each do |talk| %>
       <div class="talks_block col s6">

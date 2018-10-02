@@ -32,7 +32,7 @@ footer{
   h2{
     color:#4a4949;
     text-align:center;
-    margin:45px auto 6px;
+    margin:15px auto 6px;
     font-size:28px;
     font-weight:bold;
   }
@@ -81,22 +81,14 @@ footer{
     margin: .5em auto;
   }
 }
-.sort_top_btn{
-  position:fixed;
-  bottom:.5rem;
-  left:.5rem;
-  font-size: 1.5rem;
-  line-height: 3.8rem;
-  .fa-circle{
-    color:#6b7ee5;
-  }
-  .fa-sort-up{
-    color:#fff;
-    font-size:2.2rem;
-  }
+.shadow_section {
+  background: #f6f7f8;
+  padding: 0 0 12px 0;
 }
-
-
+.section_block {
+  background-color:#fff;
+  box-shadow: 0 5px 5px -1px rgba(0, 0, 0, 0.2);
+}
 // サムネイルのCSS
 .talk_thumnbnail_cover{
   position:relative;
@@ -144,14 +136,18 @@ footer{
 // Topページ
 #top,#category_page,#sub_category_page,#speaker{
   .category_talk_block{
-    h2{
-      font-size:1.6rem;
-      margin:.5rem .5rem .7rem;
+    h2,.category_title{
+      font-size:1.45rem;
+      margin:0;
+      padding:0 10px .7rem;
       &:first-child{
-        margin-top:1.5rem;
+        padding-top:1rem;
       }
       a{
         color:#333;
+      }
+      span{
+        font-size:1.2rem;
       }
       .to_category_page{
         font-size:1rem;
@@ -208,5 +204,33 @@ footer{
   h2{
     font-size:1.6rem;
     margin:.5rem;
+  }
+}
+#category_page,#sub_category_page,#speaker_page{
+  .page_title{
+    text-align:center;
+    font-size:1.75rem;
+    padding: .7rem 0 .2rem;
+    margin:0;
+    letter-spacing:1px;
+    line-height:1.2rem;
+    font-weight:bold;
+    background-color:#f6f7f8;
+    span{
+      font-size:.9rem;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #top,#category_page,#sub_category_page,#speaker{
+    .category_talk_block{
+      h2,.category_title{
+        font-size:1.2rem;
+        span{
+          font-size:1rem;
+        }
+      }
+    }
   }
 }

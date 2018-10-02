@@ -1,33 +1,35 @@
 <section id="top">
   <% @bigcategories.each do |category| %>
-    <div class="category_talk_block">
+    <div class="shadow_section">
+      <div class="category_talk_block section_block">
         <h2 class="category_title">
-          <%= link_to category.name, category_path(category) %>
+          <%= link_to category.name, category_path(category) %><span>（<%= category.talks.count %>件）</span>
           <span class="to_category_page right">
             <%= link_to "もっと見る", category_path(category) %>
           </span>
         </h2>
-      <div class="talks_block row">
-        <% category.talks.order("RANDOM()")[0..3].each do |talk| %>
-          <div class="talk_block col s6">
-            <div class="talk_thumnbnail_cover">
-              <%= image_tag(talk.thumbnail) %>
-              <!-- <span class="start_radio_btn <%#= talk.id %>_start_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
-              <!-- <span class="resume_radio_btn <%#= talk.id %>_resume_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
-              <!-- <span class="stop_radio_btn <%#= talk.id %>_stop_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;equals fa&#45;2x fa&#45;rotate&#45;90"></i></span> -->
-              <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
-              <!-- <div class="now_time"> -->
-              <!--   <span class="<%#= talk.id %>_pass_min">00</span>:<span class="<%#= talk.id %>_pass_sec">00</span> -->
-              <!-- </div> -->
+        <div class="talks_block row">
+          <% category.talks.order("RANDOM()")[0..3].each do |talk| %>
+            <div class="talk_block col s6">
+              <div class="talk_thumnbnail_cover">
+                <%= image_tag(talk.thumbnail) %>
+                <!-- <span class="start_radio_btn <%#= talk.id %>_start_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
+                <!-- <span class="resume_radio_btn <%#= talk.id %>_resume_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
+                <!-- <span class="stop_radio_btn <%#= talk.id %>_stop_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;equals fa&#45;2x fa&#45;rotate&#45;90"></i></span> -->
+                <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+                <!-- <div class="now_time"> -->
+                <!--   <span class="<%#= talk.id %>_pass_min">00</span>:<span class="<%#= talk.id %>_pass_sec">00</span> -->
+                <!-- </div> -->
+              </div>
+              <!-- <div class="hidden_sentence" id="<%#= talk.id %>_sentence"><%#= simple_format(talk.sentence) %></div> -->
+              <span class="speaker_name">
+                <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+              </span>
+              <br>
+              <%= link_to talk.title ,talk_path(talk) %>
             </div>
-            <!-- <div class="hidden_sentence" id="<%#= talk.id %>_sentence"><%#= simple_format(talk.sentence) %></div> -->
-            <span class="speaker_name">
-              <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
-            </span>
-            <br>
-            <%= link_to talk.title ,talk_path(talk) %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>

@@ -1,5 +1,7 @@
 <section id="speaker_page">
-  <h2><%= @speaker.name %></h2>
+  <h2 class="page_title"><%= @speaker.name %>
+  <br><span>(<%= @speaker.talks.count %>件)</span>
+  </h2>
   <ul class="row">
     <% @speaker.talks.each do |talk| %>
       <div class="talks_block col s6">

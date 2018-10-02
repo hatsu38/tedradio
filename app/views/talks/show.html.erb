@@ -15,6 +15,10 @@
       <%= @talk.speaker.name %>
       <span class="right"><%= @talk.date.strftime("%Y/%m/%d") %></span>
     </div>
+    <!-- <div class="left talk_speed"> -->
+    <!--   <div id="little_high_speed" class="chip ">1.2</div> -->
+    <!--   <div id="high_speed" class="chip ">1.5</div> -->
+    <!-- </div> -->
     <div class="categories_name right">
       <div class="chip"><%= @talk.bigcategory.name %></div>
       <div class="chip"><%= @talk.smallcategory.name %></div>
@@ -30,7 +34,7 @@
 
 <section id="relation_talk" class="talks_block row">
   <h2 class="relation_title">関連トーク</h2>
-  <% @talk.smallcategory.talks.order("RANDOM()")[0..9].each do |talk| %>
+  <% @talk.smallcategory.talks.where.not(id: @talk.id).order("RANDOM()")[0..9].each do |talk| %>
     <div class="talk_block col s6">
       <div class="talk_thumnbnail_cover">
         <%= image_tag(talk.thumbnail) %>
@@ -67,12 +71,16 @@ $(function() {
   function say(msg){
     $voise = $.grep($voices, function(n, i){return n.name == $voiseName})[0];
     $synthes.voice = $voise;                  // 音声の設定
-    $synthes.rate = 1.2;
+    $synthes.rate = 1.0;
     speechSynthesis.cancel();                 // かぶった読み停止
     $synthes.text  = msg;                     // 読む内容
     // $synthes.lang = 'ja-JP';
     speechSynthesis.speak($synthes);          // 喋れ
     console.log(msg);
+  }
+
+  function change_speed(speed){
+    $synthes.rate = speed;
   }
 
   function stop($synthes){
@@ -116,6 +124,12 @@ $(function() {
       say($("#sentence p").eq(i).text());
       $synthes.onend;
     };
+  });
+  $('#little_high_spped').on('click',function(){
+    change_speed(1.2);
+  });
+  $('#high_spped').on('click',function(){
+    change_speed(1.5);
   });
 
   $(function () {

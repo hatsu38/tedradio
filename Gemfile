@@ -8,6 +8,7 @@ end
 gem 'materialize-sass'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'serviceworker-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'

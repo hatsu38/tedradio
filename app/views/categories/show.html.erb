@@ -13,7 +13,7 @@
         </h3>
         <div class="talks_block row">
           <% category.talks.order("RANDOM()")[0..3].each do |talk| %>
-            <div class="talk_block col s6">
+            <div class="talk_block col s6 m3">
               <div class="talk_thumnbnail_cover">
                 <%= image_tag(talk.thumbnail) %>
                 <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>

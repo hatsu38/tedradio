@@ -10,9 +10,9 @@
     </div>
     <span class="take_time"><%= @talk.taketime.strftime("%H:%M") %></span>
   </div>
-  <div class="talk_info">
+  <div class="talk_info container">
     <h2><%= @talk.title %></h2>
-    <div class="container">
+    <div class="">
       <%= @talk.speaker.name %>
       <span class="right"><%= @talk.date.strftime("%Y/%m/%d") %></span>
     </div>
@@ -35,20 +35,22 @@
 </div>
 
 <div class="shadow_section">
-  <section id="relation_talk" class="talks_block row section_block">
+  <section id="relation_talk" class="row section_block">
     <h2 class="relation_title">関連トーク</h2>
-    <% @talk.smallcategory.talks.where.not(id: @talk.id).order("RANDOM()")[0..9].each do |talk| %>
-      <div class="talk_block col s6">
-        <div class="talk_thumnbnail_cover">
-          <%= image_tag(talk.thumbnail) %>
-          <!-- <span class="start_radio_btn"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
-          <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+    <div class="container talks_block ">
+      <% @talk.smallcategory.talks.where.not(id: @talk.id).order("RANDOM()")[0..11].each do |talk| %>
+        <div class="talk_block col s6 m3">
+          <div class="talk_thumnbnail_cover">
+            <%= image_tag(talk.thumbnail) %>
+            <!-- <span class="start_radio_btn"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
+            <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+          </div>
+          <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+          <br>
+          <%= link_to talk.title ,talk_path(talk) %>
         </div>
-        <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
-        <br>
-        <%= link_to talk.title ,talk_path(talk) %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </section>
 </div>
 

@@ -13,16 +13,27 @@
         </h3>
         <div class="talks_block row">
           <% category.talks.order("RANDOM()")[0..3].each do |talk| %>
-            <div class="talk_block col s6 m3">
-              <div class="talk_thumnbnail_cover">
-                <%= image_tag(talk.thumbnail) %>
+            <div class="talk_block col s6 m3 card">
+              <div class="talk_thumnbnail_cover card-image">
+                <%= image_tag(talk.thumbnail, :class => "activator") %>
                 <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+
+                <span class="detail_desp_triger activator">内容</span>
               </div>
-              <span class="speaker_name">
-                <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
-              </span>
-              <br>
-              <%= link_to talk.title ,talk_path(talk) %>
+              <div class="card-content">
+                <span class="speaker_name">
+                  <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+                </span>
+                <br>
+                <%= link_to talk.title ,talk_path(talk) %>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title">
+                  内容<i class="fas fa-times right"></i>
+                </span>
+                <p class="talk_title"><%= link_to talk.title ,talk_path(talk) %></p>
+                <p class="talk_summary"><%= talk.summary %></p>
+              </div>
             </div>
           <% end %>
         </div>

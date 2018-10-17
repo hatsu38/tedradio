@@ -37,17 +37,29 @@
 <div class="shadow_section">
   <section id="relation_talk" class="row section_block">
     <h2 class="relation_title">関連トーク</h2>
-    <div class="container talks_block ">
+    <div class="talks_block">
       <% @talk.smallcategory.talks.where.not(id: @talk.id).order("RANDOM()")[0..11].each do |talk| %>
-        <div class="talk_block col s6 m3">
-          <div class="talk_thumnbnail_cover">
-            <%= image_tag(talk.thumbnail) %>
+        <div class="talk_block col s6 m3 card">
+          <div class="talk_thumnbnail_cover card-image">
+            <%= image_tag(talk.thumbnail, :class => "activator") %>
             <!-- <span class="start_radio_btn"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
             <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+            <span class="detail_desp_triger activator">内容</span>
           </div>
-          <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
-          <br>
-          <%= link_to talk.title ,talk_path(talk) %>
+          <div class="card-content">
+            <span class="speaker_name">
+              <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+            </span>
+            <br>
+            <%= link_to talk.title ,talk_path(talk) %>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title">
+              内容<i class="fas fa-times right"></i>
+            </span>
+            <p class="talk_title"><%= link_to talk.title ,talk_path(talk) %></p>
+            <p class="talk_summary"><%= talk.summary %></p>
+          </div>
         </div>
       <% end %>
     </div>

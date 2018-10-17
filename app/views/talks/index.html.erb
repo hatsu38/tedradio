@@ -10,23 +10,26 @@
         </h2>
         <div class="talks_block row">
           <% category.talks.order("RANDOM()")[0..3].each do |talk| %>
-            <div class="talk_block col s6 m3">
-              <div class="talk_thumnbnail_cover">
-                <%= image_tag(talk.thumbnail) %>
-                <!-- <span class="start_radio_btn <%#= talk.id %>_start_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
-                <!-- <span class="resume_radio_btn <%#= talk.id %>_resume_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
-                <!-- <span class="stop_radio_btn <%#= talk.id %>_stop_btn" data&#45;talk_id="<%#= talk.id %>"><i class="fas fa&#45;equals fa&#45;2x fa&#45;rotate&#45;90"></i></span> -->
-                <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
-                <!-- <div class="now_time"> -->
-                <!--   <span class="<%#= talk.id %>_pass_min">00</span>:<span class="<%#= talk.id %>_pass_sec">00</span> -->
-                <!-- </div> -->
+            <div class="talk_block col s6 m3 card">
+              <div class="talk_thumnbnail_cover card-image">
+                  <%= image_tag(talk.thumbnail, :class => "activator") %>
+                  <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+                  <span class="detail_desp_triger activator">内容</span>
               </div>
-              <!-- <div class="hidden_sentence" id="<%#= talk.id %>_sentence"><%#= simple_format(talk.sentence) %></div> -->
-              <span class="speaker_name">
-                <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
-              </span>
-              <br>
-              <%= link_to talk.title ,talk_path(talk) %>
+              <div class="card-content">
+                <span class="speaker_name">
+                  <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+                </span>
+                <br>
+                <%= link_to talk.title ,talk_path(talk) %>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title">
+                  内容<i class="fas fa-times right"></i>
+                </span>
+                <p class="talk_title"><%= link_to talk.title ,talk_path(talk) %></p>
+                <p class="talk_summary"><%= talk.summary %></p>
+              </div>
               <div class="gap"></div>
               <div class="gap"></div>
             </div>
@@ -38,109 +41,108 @@
 </section>
 
 <script>
-$(function() {
-  var sec = 0;
-  var min = 0;
-  var timer = 0;
-  // 準備 $voicesを取得したいだけなのだけれども
-  $voise        = null;
-  $voiseName    = 'Google 日本語';
-  $voices       = speechSynthesis.getVoices();
-  $synthes      = new SpeechSynthesisUtterance();
-
-  // SpeechSynthesisUtterance()に時間かかるから様子みる
-  $repeat  = setInterval(function() {
-    if($synthes){
-      $voices  = speechSynthesis.getVoices();
-      clearInterval($repeat);
-    }
-  }, 300);
-
-  // 読み上げ
-  function say(msg){
-    $voise = $.grep($voices, function(n, i){return n.name == $voiseName})[0];
-    $synthes.voice = $voise;                  // 音声の設定
-    $synthes.rate = 1.2;
-    speechSynthesis.cancel();                 // かぶった読み停止
-    $synthes.text  = msg;                     // 読む内容
-    // $synthes.lang = 'ja-JP';
-    speechSynthesis.speak($synthes);          // 喋れ
-    console.log(msg);
-  }
-
-  function stop($synthes){
-    speechSynthesis.pause($synthes);
-  }
-
-  function resume($synthes){
-    speechSynthesis.resume($synthes);
-  }
-  function pass_count(talk_id){
-    if(sec< 10){
-      $(`.${talk_id}_pass_sec`).text("0"+parseInt(sec));
-    }else{
-      $(`.${talk_id}_pass_sec`).text(parseInt(sec));
-    }
-    if(min< 10){
-      $(`.${talk_id}_pass_min`).text("0"+parseInt(min));
-    }else{
-      $(`.${talk_id}_pass_min`).text(parseInt(min));
-    }
-    sec++;
-    if(sec == 60){
-      sec = 0;
-      min++;
-    };
-  }
-  // ボタン動作
-  $('.start_radio_btn').on('click',function(){
-    var talk_str = $(this).attr("data-talk_id");
-    var talk_id = Number(talk_str);
-    console.log(talk_id);
-    $(this).hide();
-    $(`.${talk_id}_stop_btn`).show();
-    timer = setInterval(pass_count(talk_id),1000);
-    var i = 0;
-    console.log($(this).parent("div").next("div").text());
-    // console.log($(`#${talk_id}_sentence`).text());
-    var last_say_num = $(`#${talk_id}_sentence p`).length;
-    console.log($(`#${talk_id}_sentence p`).eq(i).text());
-    say($(`#${talk_id}_sentence p`).eq(i).text());
-    $synthes.onend = function (event) {
-      if(i == last_say_num){
-        return false;
-      }
-      i++;
-      say($(`#${talk_id}_sentence p`).eq(i).text());
-      $synthes.onend;
-    };
-  });
-  //
-  // $(function () {
-  //   var ted_sentence = $(".hidden_sentence").html();
-  //   var sentence_fixed = ted_sentence.replace(/。/g, "。</p><p>");
-  //   var sentence_fixed = sentence_fixed.replace(/？/g, "？</p><p>");
-  //   var sentence_fixed = sentence_fixed.replace(/」/g, "」</p><p>");
-  //   $(".hidden_sentence").html(sentence_fixed);
-  // });
-
-  $(".stop_radio_btn").on('click',function(){
-    var talk_str = $(this).attr("data-talk_id");
-    var talk_id = Number(talk_str);
-    stop($synthes);
-    clearInterval(timer);
-    $(this).hide();
-    $(`.${talk_id}_resume_btn`).show();
-  });
-
-  $(".resume_radio_btn").on('click',function(){
-    var talk_str = $(this).attr("data-talk_id");
-    var talk_id = Number(talk_str);
-    resume($synthes);
-    timer = setInterval(pass_count(talk_id),1000);
-    $(this).hide();
-    $(`.${talk_id}_stop_btn`).show();
-  });
-});
-</script>
-
+// $(function() {
+//   var sec = 0;
+//   var min = 0;
+//   var timer = 0;
+//   // 準備 $voicesを取得したいだけなのだけれども
+//   $voise        = null;
+//   $voiseName    = 'Google 日本語';
+//   $voices       = speechSynthesis.getVoices();
+//   $synthes      = new SpeechSynthesisUtterance();
+//
+//   // SpeechSynthesisUtterance()に時間かかるから様子みる
+//   $repeat  = setInterval(function() {
+//     if($synthes){
+//       $voices  = speechSynthesis.getVoices();
+//       clearInterval($repeat);
+//     }
+//   }, 300);
+//
+//   // 読み上げ
+//   function say(msg){
+//     $voise = $.grep($voices, function(n, i){return n.name == $voiseName})[0];
+//     $synthes.voice = $voise;                  // 音声の設定
+//     $synthes.rate = 1.2;
+//     speechSynthesis.cancel();                 // かぶった読み停止
+//     $synthes.text  = msg;                     // 読む内容
+//     // $synthes.lang = 'ja-JP';
+//     speechSynthesis.speak($synthes);          // 喋れ
+//     console.log(msg);
+//   }
+//
+//   function stop($synthes){
+//     speechSynthesis.pause($synthes);
+//   }
+//
+//   function resume($synthes){
+//     speechSynthesis.resume($synthes);
+//   }
+//   function pass_count(talk_id){
+//     if(sec< 10){
+//       $(`.${talk_id}_pass_sec`).text("0"+parseInt(sec));
+//     }else{
+//       $(`.${talk_id}_pass_sec`).text(parseInt(sec));
+//     }
+//     if(min< 10){
+//       $(`.${talk_id}_pass_min`).text("0"+parseInt(min));
+//     }else{
+//       $(`.${talk_id}_pass_min`).text(parseInt(min));
+//     }
+//     sec++;
+//     if(sec == 60){
+//       sec = 0;
+//       min++;
+//     };
+//   }
+//   // ボタン動作
+//   $('.start_radio_btn').on('click',function(){
+//     var talk_str = $(this).attr("data-talk_id");
+//     var talk_id = Number(talk_str);
+//     console.log(talk_id);
+//     $(this).hide();
+//     $(`.${talk_id}_stop_btn`).show();
+//     timer = setInterval(pass_count(talk_id),1000);
+//     var i = 0;
+//     console.log($(this).parent("div").next("div").text());
+//     // console.log($(`#${talk_id}_sentence`).text());
+//     var last_say_num = $(`#${talk_id}_sentence p`).length;
+//     console.log($(`#${talk_id}_sentence p`).eq(i).text());
+//     say($(`#${talk_id}_sentence p`).eq(i).text());
+//     $synthes.onend = function (event) {
+//       if(i == last_say_num){
+//         return false;
+//       }
+//       i++;
+//       say($(`#${talk_id}_sentence p`).eq(i).text());
+//       $synthes.onend;
+//     };
+//   });
+//   //
+//   // $(function () {
+//   //   var ted_sentence = $(".hidden_sentence").html();
+//   //   var sentence_fixed = ted_sentence.replace(/。/g, "。</p><p>");
+//   //   var sentence_fixed = sentence_fixed.replace(/？/g, "？</p><p>");
+//   //   var sentence_fixed = sentence_fixed.replace(/」/g, "」</p><p>");
+//   //   $(".hidden_sentence").html(sentence_fixed);
+//   // });
+//
+//   $(".stop_radio_btn").on('click',function(){
+//     var talk_str = $(this).attr("data-talk_id");
+//     var talk_id = Number(talk_str);
+//     stop($synthes);
+//     clearInterval(timer);
+//     $(this).hide();
+//     $(`.${talk_id}_resume_btn`).show();
+//   });
+//
+//   $(".resume_radio_btn").on('click',function(){
+//     var talk_str = $(this).attr("data-talk_id");
+//     var talk_id = Number(talk_str);
+//     resume($synthes);
+//     timer = setInterval(pass_count(talk_id),1000);
+//     $(this).hide();
+//     $(`.${talk_id}_stop_btn`).show();
+//   });
+// });
+// </script>

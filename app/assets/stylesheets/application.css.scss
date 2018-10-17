@@ -108,8 +108,11 @@ footer{
   }
   .start_radio_btn,.stop_radio_btn,.resume_radio_btn{
     position:absolute;
-    top:40%;
-    right:45%;
+    top:50%;
+    left:50%;
+    -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
     text-align:center;
     background-color:rgba(0,0,0,.5);
     color:#fff;
@@ -133,12 +136,38 @@ footer{
     font-size:.9rem;
     left:.5rem;
   }
+  .detail_desp_triger{
+    position:absolute;
+    bottom:.5rem;
+    color:#f00;
+    font-size:.9rem;
+    left:.5rem;
+    letter-spacing:1px;
+    font-weight:bold;
+  }
 }
 // 2カラムのトーク一覧
 .talks_block{
   .talk_block{
     height:240px;
-    a{
+    box-shadow:none;
+    .card-content{
+      padding:0;
+    }
+    .card-reveal{
+      padding:1rem;
+      .card-title{
+        line-height:1rem;
+        font-weight:bold;
+        font-size:1.4rem;
+        i{
+          line-height:1rem;
+          color:#666;
+        }
+      }
+      .talk_title,.talk_summary{
+        margin:.4rem auto;
+      }
     }
   }
 }
@@ -195,7 +224,7 @@ footer{
   }
   h2{
     font-size:1.6rem;
-    margin:.5rem 1.3rem;
+    margin:.5rem 1.3rem .5rem 0;
   }
   .summary{
     clear:both;

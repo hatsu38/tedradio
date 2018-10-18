@@ -16,10 +16,11 @@
       <%= @talk.speaker.name %>
       <span class="right"><%= @talk.date.strftime("%Y/%m/%d") %></span>
     </div>
-    <!-- <div class="left talk_speed"> -->
-    <!--   <div id="little_high_speed" class="chip ">1.2</div> -->
-    <!--   <div id="high_speed" class="chip ">1.5</div> -->
-    <!-- </div> -->
+    <div class="left talk_speed">
+      <div id="normal_speed" class="chip ">×1.0</div>
+      <div id="little_high_speed" class="chip ">×1.2</div>
+      <div id="high_speed" class="chip ">×1.5</div>
+    </div>
     <div class="categories_name right">
       <div class="chip"><%= @talk.bigcategory.name %></div>
       <div class="chip"><%= @talk.smallcategory.name %></div>
@@ -71,6 +72,7 @@ $(function() {
   var sec = 0;
   var min = 0;
   var timer = 0;
+  var speed = 1.1;
   // 準備 $voicesを取得したいだけなのだけれども
   $voise        = null;
   $voiseName    = 'Google 日本語';
@@ -86,10 +88,10 @@ $(function() {
   }, 300);
 
   // 読み上げ
-  function say(msg){
+  function say(msg,speed){
     $voise = $.grep($voices, function(n, i){return n.name == $voiseName})[0];
     $synthes.voice = $voise;                  // 音声の設定
-    $synthes.rate = 1.0;
+    $synthes.rate = speed;
     speechSynthesis.cancel();                 // かぶった読み停止
     $synthes.text  = msg;                     // 読む内容
     // $synthes.lang = 'ja-JP';
@@ -125,29 +127,54 @@ $(function() {
       min++;
     };
   }
+  function speed_change_color(speed){
+    switch(speed){
+      case 1.1:
+        $("#normal_speed").addClass("active");
+        $("#little_high_speed").removeClass("active");
+        $("#high_speed").removeClass("active");
+        break;
+      case 1.2:
+        $("#normal_speed").removeClass("active");
+        $("#little_high_speed").addClass("active");
+        $("#high_speed").removeClass("active");
+        break;
+      case 1.5:
+        $("#normal_speed").removeClass("active");
+        $("#little_high_speed").removeClass("active");
+        $("#high_speed").addClass("active");
+        break;
+    }
+  }
+
   // ボタン動作
   $('#start_btn').on('click',function(){
     $(this).hide();
     $("#stop_btn").show();
+    speed_change_color(speed);
     timer = setInterval(pass_count,1000);
     var i = 0;
     var last_say_num = $("#sentence p").length;
-    console.log(last_say_num);
-    say($("#sentence p").eq(i).text());
+    say($("#sentence p").eq(i).text(),speed);
     $synthes.onend = function (event) {
       if(i == last_say_num){
         return false;
       }
       i++;
-      say($("#sentence p").eq(i).text());
+      speed_change_color(speed);
+      say($("#sentence p").eq(i).text(),speed);
       $synthes.onend;
     };
   });
-  $('#little_high_spped').on('click',function(){
-    change_speed(1.2);
+
+  $('#normal_speed').on('click',function(){
+    speed = 1.1;
   });
-  $('#high_spped').on('click',function(){
-    change_speed(1.5);
+  $('#little_high_speed').on('click',function(){
+    speed = 1.2;
+  });
+  $('#high_speed').on('click',function(){
+    speed = 1.5;
   });
 
   $(function () {
@@ -157,6 +184,7 @@ $(function() {
     var sentence_fixed = sentence_fixed.replace(/」/g, "」</p><p>");
     $("#sentence").html(sentence_fixed);
   });
+
 
   $("#stop_btn").on('click',function(){
     stop($synthes);

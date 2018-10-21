@@ -1,38 +1,41 @@
 <div class="shadow_section">
-<section id="show" class="section_block">
-  <div class="talk_thumnbnail_cover">
-    <%= image_tag @talk.thumbnail %>
-    <span id="start_btn" class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
-    <span id="resume_btn" class="resume_radio_btn"><i class="fas fa-play fa-2x"></i></span>
-    <span id="stop_btn" class="stop_radio_btn"><i class="fas fa-equals fa-2x fa-rotate-90"></i></span>
-    <div id="pass_time" class="now_time">
-      <span id="pass_min">00</span>:<span id="pass_sec">00</span>
+  <section id="show" class="section_block">
+    <div class="talk_thumnbnail_cover">
+      <%= image_tag @talk.thumbnail %>
+      <span id="start_btn" class="start_radio_btn"><i class="fas fa-play fa-2x"></i></span>
+      <span id="resume_btn" class="resume_radio_btn"><i class="fas fa-play fa-2x"></i></span>
+      <span id="stop_btn" class="stop_radio_btn"><i class="fas fa-equals fa-2x fa-rotate-90"></i></span>
+      <div id="pass_time" class="now_time">
+        <span id="pass_min">00</span>:<span id="pass_sec">00</span>
+      </div>
+      <span class="take_time"><%= @talk.taketime.strftime("%H:%M") %></span>
+      <div class="progress">
+        <div class="determinate" style="width: 0%"></div>
+      </div>
     </div>
-    <span class="take_time"><%= @talk.taketime.strftime("%H:%M") %></span>
-  </div>
-  <div class="talk_info container">
-    <h2><%= @talk.title %></h2>
-    <div class="">
-      <%= @talk.speaker.name %>
-      <span class="right"><%= @talk.date.strftime("%Y/%m/%d") %></span>
+    <div class="talk_info container">
+      <h2><%= @talk.title %></h2>
+      <div class="">
+        <%= @talk.speaker.name %>
+        <span class="right"><%= @talk.date.strftime("%Y/%m/%d") %></span>
+      </div>
+      <div class="left talk_speed">
+        <div id="normal_speed" class="chip ">×1.0</div>
+        <div id="little_high_speed" class="chip ">×1.2</div>
+        <div id="high_speed" class="chip ">×1.5</div>
+      </div>
+      <div class="categories_name right">
+        <div class="chip"><%= @talk.bigcategory.name %></div>
+        <div class="chip"><%= @talk.smallcategory.name %></div>
+      </div>
     </div>
-    <div class="left talk_speed">
-      <div id="normal_speed" class="chip ">×1.0</div>
-      <div id="little_high_speed" class="chip ">×1.2</div>
-      <div id="high_speed" class="chip ">×1.5</div>
+    <div class="summary container">
+      <%= simple_format(@talk.summary) %>
     </div>
-    <div class="categories_name right">
-      <div class="chip"><%= @talk.bigcategory.name %></div>
-      <div class="chip"><%= @talk.smallcategory.name %></div>
+    <div id="sentence" class="sentence container">
+      <%= simple_format(@talk.sentence) %>
     </div>
-  </div>
-  <div class="summary container">
-    <%= simple_format(@talk.summary) %>
-  </div>
-  <div id="sentence" class="sentence container">
-    <%= simple_format(@talk.sentence) %>
-  </div>
-</section>
+  </section>
 </div>
 
 <div class="shadow_section">
@@ -147,6 +150,11 @@ $(function() {
     }
   }
 
+  function progressbar_style(i,all){
+    var progress_rate = (i/all)*100;
+    $(".determinate").css("width",progress_rate+"%");
+  }
+
   // ボタン動作
   $('#start_btn').on('click',function(){
     $(this).hide();
@@ -161,6 +169,7 @@ $(function() {
         return false;
       }
       i++;
+      progressbar_style(i,last_say_num);
       speed_change_color(speed);
       say($("#sentence p").eq(i).text(),speed);
       $synthes.onend;

@@ -85,7 +85,7 @@
             <% @categories.each do |category| %>
               <li class="row">
                 <div class="collapsible-header col s11">
-                  <%= category.name %>
+                  <i class="fas fa-plus"></i><%= category.name %>
                   <span>(<%= category.talks.count %>)</span>
                 </div>
                 <%= link_to category_path(category),class: 'to_category_link s1' do %>

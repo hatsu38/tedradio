@@ -6,6 +6,5 @@ class SpeakersController < ApplicationController
   def show
     @speaker = Speaker.find(params[:id])
     @talks = Talk.order("RANDOM()")[0..11]
-    @categories = Bigcategory.order("RANDOM()")
   end
 end

@@ -1,43 +1,46 @@
-<section id="category_page">
-  <h2 class="page_title"><%= @category.name %>
-  <br><span>(<%= @category.talks.count %>件)</span>
-  </h2>
-  <% @category.smallcategories.each do |category| %>
-    <div class="shadow_section">
-      <div class="category_talk_block section_block">
-        <h3 class="category_title">
-          <%= link_to category.name, subcategory_path(category) %><span>（<%= category.talks.count %>件）</span>
-          <span class="to_category_page right">
-            <%= link_to "もっと見る", subcategory_path(category) %>
-          </span>
-        </h3>
-        <div class="talks_block row">
-          <% category.talks.order("RANDOM()")[0..3].each do |talk| %>
-            <div class="talk_block col s6 m3 card">
-              <div class="talk_thumnbnail_cover card-image">
-                <%= image_tag(talk.thumbnail, :class => "activator") %>
-                <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+<div class="shadow_section">
+  <section id="category_page" class="section_blok">
+    <h2 class="page_title"><%= @category.name %>
+    <br><span>(<%= @category.talks.count %>件)</span>
+    </h2>
+    <% @category.smallcategories.each do |category| %>
+      <div class="shadow_section">
+        <div class="category_talk_block section_block">
+          <h3 class="category_title">
+            <%= link_to category.name, subcategory_path(category) %><span>（<%= category.talks.count %>件）</span>
+            <span class="to_category_page right">
+              <%= link_to "もっと見る", subcategory_path(category) %>
+            </span>
+          </h3>
+          <div class="talks_block row">
+            <% category.talks.order("RANDOM()")[0..3].each do |talk| %>
+              <div class="talk_block col s6 m3 card">
+                <div class="talk_thumnbnail_cover card-image">
+                  <%= image_tag(talk.thumbnail, :class => "activator") %>
+                  <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
 
-                <span class="detail_desp_triger activator">内容</span>
+                  <span class="detail_desp_triger activator">内容</span>
+                </div>
+                <div class="card-content">
+                  <span class="speaker_name">
+                    <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+                  </span>
+                  <br>
+                  <%= link_to talk.title ,talk_path(talk) %>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title">
+                    内容<i class="fas fa-times right"></i>
+                  </span>
+                  <p class="talk_title"><%= link_to talk.title ,talk_path(talk) %></p>
+                  <p class="talk_summary"><%= talk.summary %></p>
+                </div>
               </div>
-              <div class="card-content">
-                <span class="speaker_name">
-                  <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
-                </span>
-                <br>
-                <%= link_to talk.title ,talk_path(talk) %>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title">
-                  内容<i class="fas fa-times right"></i>
-                </span>
-                <p class="talk_title"><%= link_to talk.title ,talk_path(talk) %></p>
-                <p class="talk_summary"><%= talk.summary %></p>
-              </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</section>
+    <% end %>
+  </section>
+</div>
+

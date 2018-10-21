@@ -76,6 +76,43 @@
       <h1><%= link_to "TEDRadio",root_path %></h1>
     </header>
     <%= yield %>
+
+    <div class="shadow_section">
+      <section id="relation_category" class="section_block">
+        <h2 class="relation_title">カテゴリー一覧</h2>
+        <div class="talks_block">
+          <ul class="collapsible">
+            <% @categories.each do |category| %>
+              <li class="row">
+                <div class="collapsible-header col s11">
+                  <%= category.name %>
+                  <span>(<%= category.talks.count %>)</span>
+                </div>
+                <%= link_to category_path(category),class: 'to_category_link s1' do %>
+                  <i class="material-icons">send</i>
+                <% end %>
+                <div class="collapsible-body">
+                  <ul class="collection">
+                    <% category.smallcategories.each do |subcategory| %>
+                      <%= link_to subcategory_path(subcategory) do %>
+                        <li class="collection-item">
+                          <%= subcategory.name %>
+                          <span>(<%= subcategory.talks.count %>)</span>
+                          <%= link_to subcategory_path(subcategory),class: 'secondary-content' do %>
+                            <i class="material-icons">send</i>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </section>
+    </div>
+
     <footer>
       <h2>シェアする</h2>
       <div class="footer_border_top"></div>

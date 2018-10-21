@@ -1,13 +1,47 @@
-<section id="speaker_page">
-  <h2 class="page_title"><%= @speaker.name %>
-  <br><span>(<%= @speaker.talks.count %>件)</span>
-  </h2>
-  <ul class="row">
-    <% @speaker.talks.each do |talk| %>
-      <div class="talks_block col s6 ">
-        <div class="talk_block card">
-          <div class="talk_thumnbnail_cover">
+<div class="shadow_section">
+  <section id="speaker_page" class="section_block">
+    <h2 class="page_title"><%= @speaker.name %>
+    <br><span>(<%= @speaker.talks.count %>件)</span>
+    </h2>
+    <ul class="row">
+      <% @speaker.talks.each do |talk| %>
+        <div class="talks_block col s6 ">
+          <div class="talk_block card">
+            <div class="talk_thumnbnail_cover">
+              <%= image_tag(talk.thumbnail, :class => "activator") %>
+              <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+              <span class="detail_desp_triger activator">内容</span>
+            </div>
+            <div class="card-content">
+              <span class="speaker_name">
+                <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+              </span>
+              <br>
+              <%= link_to talk.title ,talk_path(talk) %>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title">
+                内容<i class="fas fa-times right"></i>
+              </span>
+              <p class="talk_title"><%= link_to talk.title ,talk_path(talk) %></p>
+              <p class="talk_summary"><%= talk.summary %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </ul>
+  </section>
+</div>
+
+<div class="shadow_section">
+  <section id="relation_talk" class="row section_block">
+    <h2 class="relation_title">関連トーク</h2>
+    <div class="talks_block">
+      <% @talks.each do |talk| %>
+        <div class="talk_block col s6 m3 card">
+          <div class="talk_thumnbnail_cover card-image">
             <%= image_tag(talk.thumbnail, :class => "activator") %>
+            <!-- <span class="start_radio_btn"><i class="fas fa&#45;play fa&#45;2x"></i></span> -->
             <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
             <span class="detail_desp_triger activator">内容</span>
           </div>
@@ -26,7 +60,44 @@
             <p class="talk_summary"><%= talk.summary %></p>
           </div>
         </div>
-      </div>
-    <% end %>
-  </ul>
-</section>
+      <% end %>
+    </div>
+  </section>
+</div>
+
+<div class="shadow_section">
+  <section id="relation_category" class="section_block">
+    <h2 class="relation_title">カテゴリー一覧</h2>
+    <div class="talks_block">
+      <ul class="collapsible">
+        <% @categories.each do |category| %>
+          <li class="row">
+            <div class="collapsible-header col s11">
+              <%= category.name %>
+              <span>(<%= category.talks.count %>)</span>
+            </div>
+            <%= link_to category_path(category),class: 'to_category_link s1' do %>
+              <i class="material-icons">send</i>
+            <% end %>
+            <div class="collapsible-body">
+              <ul class="collection">
+                <% category.smallcategories.each do |subcategory| %>
+                  <%= link_to subcategory_path(subcategory) do %>
+                    <li class="collection-item">
+                      <%= subcategory.name %>
+                      <span>(<%= subcategory.talks.count %>)</span>
+                      <%= link_to subcategory_path(subcategory),class: 'secondary-content' do %>
+                        <i class="material-icons">send</i>
+                      <% end %>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+</div>
+

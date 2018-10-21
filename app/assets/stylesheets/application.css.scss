@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+@import "materialize/components/color";
+$primary-color: color("blue", "lighten-2") !default;
+@import 'materialize';
 body{
   margin:0;
 }
@@ -179,6 +182,33 @@ footer{
       }
     }
   }
+  .collapsible{
+    box-shadow:none;
+    margin:0;
+    border:none;
+    li{
+      margin:0;
+      .to_category_link{
+        line-height:4rem;
+      }
+      .collapsible-header{
+        padding: .8rem 0 .8rem 1rem;
+      }
+      .collapsible-body{
+        padding:0;
+      }
+    }
+    .collection{
+      margin-top:-.7rem;
+      .collection-item{
+        a{
+          span{
+            font-size:.85rem;
+          }
+        }
+      }
+    }
+  }
 }
 
 // Topページ
@@ -260,7 +290,7 @@ footer{
     }
   }
 }
-#relation_talk{
+#relation_talk,#relation_category{
   .relation_title{
     font-size:1.5rem;
     text-align:center;

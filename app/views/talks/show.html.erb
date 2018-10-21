@@ -16,7 +16,7 @@
     <div class="talk_info container">
       <h2><%= @talk.title %></h2>
       <div class="">
-        <%= @talk.speaker.name %>
+        <%= link_to @talk.speaker.name,speaker_path(@talk.speaker.id) %>
         <span class="right"><%= @talk.date.strftime("%Y/%m/%d") %></span>
       </div>
       <div class="left talk_speed">
@@ -25,8 +25,8 @@
         <div id="high_speed" class="chip ">×1.5</div>
       </div>
       <div class="categories_name right">
-        <div class="chip"><%= @talk.bigcategory.name %></div>
-        <div class="chip"><%= @talk.smallcategory.name %></div>
+        <div class="chip"><%= link_to @talk.bigcategory.name,category_path(@talk.bigcategory.id) %></div>
+        <div class="chip"><%= link_to @talk.smallcategory.name,subcategory_path(@talk.smallcategory.id) %></div>
       </div>
     </div>
     <div class="summary container">
@@ -42,7 +42,7 @@
   <section id="relation_talk" class="row section_block">
     <h2 class="relation_title">関連トーク</h2>
     <div class="talks_block">
-      <% @talk.smallcategory.talks.where.not(id: @talk.id).order("RANDOM()")[0..11].each do |talk| %>
+      <% @relation_talk.each do |talk| %>
         <div class="talk_block col s6 m3 card">
           <div class="talk_thumnbnail_cover card-image">
             <%= image_tag(talk.thumbnail, :class => "activator") %>

@@ -25,8 +25,12 @@
         <div id="high_speed" class="chip ">×1.5</div>
       </div>
       <div class="categories_name right">
-        <div class="chip"><%= link_to @talk.bigcategory.name,category_path(@talk.bigcategory.id) %></div>
-        <div class="chip"><%= link_to @talk.smallcategory.name,subcategory_path(@talk.smallcategory.id) %></div>
+        <div class="chip">
+          <%= link_to @talk.bigcategory.name,category_path(@talk.bigcategory.id) %>
+        </div>
+        <div class="chip">
+          <%= link_to @talk.smallcategory.name,subcategory_path(@talk.smallcategory.id) %>
+        </div>
       </div>
     </div>
     <div class="summary container">

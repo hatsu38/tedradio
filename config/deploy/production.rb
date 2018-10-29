@@ -1,4 +1,4 @@
-server '52.197.84.47:', user: 'hajime', roles: %w{app db web}
+server '52.197.84.47', user: 'hajime', roles: %w{app db web}
 set :ssh_options, keys: '~/.ssh/tedradio_key_rsa'
 # server-based syntax
 # ======================

@@ -5,6 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'dotenv-rails'
+gem 'fog'
+gem 'fog-aws'
+gem 'carrierwave'
+
 gem 'materialize-sass'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

@@ -215,7 +215,7 @@ footer{
 }
 
 // Topページ
-#top,#category_page,#sub_category_page,#speaker{
+#top,#category_page,#sub_category_page,#speaker,#relation_talk,#speaker_page{
   .category_talk_block{
     h2,.category_title{
       font-size:1.45rem;
@@ -237,7 +237,8 @@ footer{
         }
       }
     }
-    .talk_block{
+  }
+  .talk_block{
       .hidden_sentence{
         display:none;
       }
@@ -247,7 +248,6 @@ footer{
         }
       }
     }
-  }
 }
 
 #show{

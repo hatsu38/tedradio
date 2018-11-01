@@ -32,13 +32,15 @@ CSV.foreach(smallcategory_csv, headers: true) do |data|
   )
 end
 
+count = 0
 CSV.foreach(talk_csv, headers: true) do |data|
+  break if count > 100
   Talk.create(
     title: data[2],
     summary: data[3],
     sentence: data[11],
-    remote_thumbnail_url: data[4],
-    # thumbnail: data[4],
+    # remote_thumbnail_url: data[4],
+    thumbnail: data[4],
     hp: data[5],
     taketime: data[6],
     date: data[7],
@@ -46,4 +48,5 @@ CSV.foreach(talk_csv, headers: true) do |data|
     smallcategory_id: data[13],
     speaker_id: data[12],
   )
+  count = count + 1
 end

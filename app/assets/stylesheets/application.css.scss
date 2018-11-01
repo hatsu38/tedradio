@@ -165,7 +165,7 @@ footer{
       padding:0;
     }
     .card-reveal{
-      padding:1rem;
+      padding:.5rem;
       .card-title{
         line-height:1rem;
         font-weight:bold;
@@ -173,6 +173,7 @@ footer{
         i{
           line-height:1rem;
           color:#666;
+          margin:0 .5rem;
         }
       }
       .talk_title,.talk_summary{
@@ -247,6 +248,11 @@ footer{
           color:#333;
         }
       }
+      .talk_thumnbnail_cover{
+        .detail_desp_triger,.take_time{
+          bottom:.1rem;
+        }
+      }
     }
 }
 
@@ -258,6 +264,17 @@ footer{
     img{
       max-height:350px;
       width:auto;
+    }
+    .flow_text{
+      position: absolute;
+      width:100%;
+      // display:none;
+      background:rgba(0,0,0,.4);
+      color:#fff;
+      margin: 0;
+      bottom: 2rem;
+      text-align: left;
+      padding: 0 5px;
     }
   }
   img{
@@ -277,18 +294,21 @@ footer{
     padding:0 10px 0;
     background-color:#f6f7f8;
     border-radius:5px;
+    line-height:1.7rem;
+    color:#000;
+    font-size:1.03rem;
   }
-  .categories_name,.talk_speed{
-    .chip{
-      font-size:.5rem;
-      padding:0 .5rem;
-      height:auto;
-      line-height:2rem;
-      border-radius:.5rem;
+}
+.categories_name,.talk_speed{
+  .chip{
+    font-size:.5rem;
+    padding:0 .5rem;
+    height:auto;
+    line-height:2rem;
+    border-radius:.5rem;
+    color:#555;
+    a{
       color:#555;
-      a{
-        color:#555;
-      }
     }
   }
   .talk_speed{

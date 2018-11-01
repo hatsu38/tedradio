@@ -7,7 +7,7 @@
       <% @speaker.talks.each do |talk| %>
         <div class="talks_block col s6 ">
           <div class="talk_block card">
-            <div class="talk_thumnbnail_cover">
+            <div class="talk_thumnbnail_cover card-image">
               <%= image_tag(talk.thumbnail, :class => "activator") %>
               <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
               <span class="detail_desp_triger activator">内容</span>

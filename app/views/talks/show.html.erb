@@ -12,6 +12,7 @@
       <div class="progress">
         <div class="determinate" style="width: 0%"></div>
       </div>
+      <p class="flow_text"></p>
     </div>
     <div class="talk_info container">
       <h2><%= @talk.title %></h2>
@@ -103,7 +104,7 @@ $(function() {
     $synthes.text  = msg;                     // 読む内容
     // $synthes.lang = 'ja-JP';
     speechSynthesis.speak($synthes);          // 喋れ
-    console.log(msg);
+    $(".flow_text").text(msg);
   }
 
   function change_speed(speed){

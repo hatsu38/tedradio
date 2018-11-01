@@ -18,3 +18,7 @@
 
 //= require serviceworker-companion
 //
+$(document).ready(function(){
+  $('.collapsible').collapsible();
+});
+

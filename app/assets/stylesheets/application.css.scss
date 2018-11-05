@@ -27,6 +27,35 @@ header{
       color:#fff;
     }
   }
+  .form_to_appear,.form_to_close{
+    color:#fff;
+    position: absolute;
+    top: 1rem;
+    font-size:1.3rem;
+  }
+  .form_to_appear{
+    right:1rem;
+  }
+  .form_to_close{
+    display:none;
+    left:.5rem;
+  }
+  .search_form{
+    display:none;
+    margin-bottom:0;
+    padding:0 5px;
+    .search_field{
+      color:#fff;
+      margin-bottom:0;
+    }
+    .search_btn{
+      margin-top: 5px;
+      background: red;
+      font-weight: bold;
+    }
+  }
+
+
 }
 footer{
   h2{
@@ -216,7 +245,20 @@ footer{
 }
 
 // Topページ
-#top,#category_page,#sub_category_page,#speaker,#relation_talk,#speaker_page{
+.search_word{
+  background-color:#f4f4f4;
+  color:#333;
+  font-size:1.15rem;
+  text-align:center;
+  padding:5px 0;
+  margin:0;
+  span{
+    font-size:1.3rem;
+    color:#000;
+    font-weight:bold;
+  }
+}
+#top,#search,#category_page,#sub_category_page,#speaker,#relation_talk,#speaker_page{
   .category_talk_block{
     h2,.category_title{
       font-size:1.45rem;
@@ -349,6 +391,19 @@ footer{
   }
 }
 
+#search{
+  .search_section_title{
+    margin: .5rem auto 0.2rem;
+    font-size: 1.8rem;
+    text-align: center;
+    letter-spacing:2.5px;
+  }
+}
+.title_border{
+  border-bottom:3px solid red;
+  width:45px;
+  margin:0 auto;
+}
 @media screen and (max-width: 320px) {
   #top,#category_page,#sub_category_page,#speaker{
     .category_talk_block{

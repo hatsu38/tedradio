@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root to: "talks#index"
+  get 'search', to: 'talks#search'
   resources :talks, only: [:index,:show]
   resources :categories, only: [:index,:show]
   resources :subcategories, only: [:show]

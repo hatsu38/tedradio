@@ -22,3 +22,19 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
 });
 
+$(function() {
+  $(".form_to_appear").on('click',function(){
+    console.log("hoge");
+    $(".form_to_close").show();
+    $(".form_to_appear").hide();
+    $('.search_form').show();
+    $('h1').hide();
+  });
+
+  $(".form_to_close").on('click',function(){
+    $(".form_to_appear").show();
+    $(".form_to_close").hide();
+    $('.search_form').hide();
+    $('h1').show();
+  });
+});

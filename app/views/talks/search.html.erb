@@ -2,7 +2,7 @@
   <h2 class="search_word">
     <span>「<%= params[:search] %></span>」 の検索結果は<%= @speakers_talks_volume %>件です。
   </h2>
-  <% if @talks.count != 0 %>
+  <% if @talks.count > 0 %>
     <div class="shadow_section">
       <div class="talks_block row section_block">
         <% if @talks.count > 0 && @speakers.count > 0 %>
@@ -38,7 +38,7 @@
     </div>
   <% end %>
 
-  <% if @speakers.count != 0 %>
+  <% if @speakers.count > 0 %>
     <div class="shadow_section">
       <div class="talks_block row section_block">
         <% if @talks.count > 0 && @speakers.count > 0 %>
@@ -71,6 +71,39 @@
               </div>
             </div>
           <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% if @perhaps %>
+    <div class="shadow_section">
+      <div class="talks_block row section_block">
+        <h3 class="search_section_title">関連トーク</h3>
+        <div class="title_border"></div>
+        <% @perhaps.each do |talk| %>
+          <div class="talks_block col s6">
+            <div class="talk_block card">
+              <div class="talk_thumnbnail_cover card-image">
+                <%= image_tag(talk.thumbnail, :class => "activator") %>
+                <span class="take_time"><%= talk.taketime.strftime("%H:%M") %></span>
+                <span class="detail_desp_triger activator">内容</span>
+              </div>
+              <div class="card-content">
+                <span class="speaker_name">
+                  <%= link_to talk.speaker.name,speaker_path(talk.speaker.id) %>
+                </span>
+                <br>
+                <%= link_to talk.title ,talk_path(talk) %>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title">
+                  内容<i class="fas fa-times right"></i>
+                </span>
+                <p class="talk_title"><%= link_to talk.title ,talk_path(talk) %></p>
+                <p class="talk_summary"><%= talk.summary %></p>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>

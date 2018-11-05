@@ -9,4 +9,10 @@ class Talk < ApplicationRecord
       where(['title LIKE ?', "%#{search}%"])
     end
   end
+
+  def self.summery_search(search)
+    if search
+      where(['summary LIKE ?', "%#{search}%"])
+    end
+  end
 end

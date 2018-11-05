@@ -10,6 +10,7 @@ class TalksController < ApplicationController
       @speakers.each do |speaker|
         @speakers_talks_volume += speaker.talks.count
       end
+      @perhaps = Talk.summery_search(params[:search]) if @speakers_talks_volume == 0
   end
 
   def show

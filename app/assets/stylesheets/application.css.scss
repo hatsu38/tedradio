@@ -323,9 +323,13 @@ footer{
     max-width:100%;
     width:100%;
   }
-  h2{
+  h1{
     font-size:1.6rem;
     margin:.5rem 1.3rem .5rem 0;
+  }
+  .talk_share_btn{
+    line-height:.5rem;
+    margin-left:1rem;
   }
   .summary{
     clear:both;
@@ -343,7 +347,7 @@ footer{
 }
 .categories_name,.talk_speed{
   .chip{
-    font-size:.5rem;
+    font-size:.8rem;
     padding:0 .5rem;
     height:auto;
     line-height:2rem;

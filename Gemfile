@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'meta-tags'
+
 gem 'dotenv-rails'
 gem 'fog'
 gem 'fog-aws'

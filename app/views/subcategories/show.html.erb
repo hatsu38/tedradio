@@ -1,8 +1,9 @@
+<% set_meta_tags title: @subcategory.name+"カテゴリーページ",  og: { title: @subcategory.name+"カテゴリーページ"} %>
 <div class="shadow_section">
   <section id="sub_category_page" class="section_block">
-    <h2 class="page_title"><%= @subcategory.name %>
+    <h1 class="page_title"><%= @subcategory.name %>
     <br><span>(<%= @subcategory.talks.count %>件)</span>
-    </h2>
+    </h1>
     <ul class="row">
       <% @subcategory.talks.each do |talk| %>
         <div class="talks_block col s6 m3">

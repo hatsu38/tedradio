@@ -1,8 +1,8 @@
 <div class="shadow_section">
   <section id="category_page" class="section_blok">
-    <h2 class="page_title"><%= @category.name %>
+    <h1 class="page_title"><%= @category.name %>
     <br><span>(<%= @category.talks.count %>件)</span>
-    </h2>
+    </h1>
     <% @category.smallcategories.each do |category| %>
       <div class="shadow_section">
         <div class="category_talk_block section_block">

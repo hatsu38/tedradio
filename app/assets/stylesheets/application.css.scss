@@ -404,6 +404,20 @@ footer{
   width:45px;
   margin:0 auto;
 }
+#error{
+  text-align:center;
+  h1{
+    margin:.5rem 0;
+    font-size:2.5rem;
+  }
+  p{
+    margin-bottom:.1rem;
+  }
+  .top_link{
+    margin-bottom:1rem;
+    padding-bottom:1rem;
+  }
+}
 @media screen and (max-width: 320px) {
   #top,#category_page,#sub_category_page,#speaker{
     .category_talk_block{

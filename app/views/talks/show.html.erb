@@ -1,4 +1,4 @@
-<% set_meta_tags title: @talk.speaker.name + "の話す" + @talk.title ,  og: { title: @talk.speaker.name + "の話す" + @talk.title,image: @talk.thumbnail} %>
+<% set_meta_tags title: @talk.speaker.name + "の話す" + @talk.title ,  og: { title: @talk.speaker.name + "の話す" + @talk.title,image: @talk.thumbnail,type: "artcle"} %>
 
 <div class="shadow_section">
   <section id="show" class="section_block">
@@ -26,21 +26,23 @@
         <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%=request.url %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">シェア</a>
       </div>
     </div>
-    <div class="">
+    <div class="talk_detail_info">
       <%= link_to @talk.speaker.name,speaker_path(@talk.speaker.id) %>
       <span class="right"><%= @talk.date.strftime("%Y/%m/%d") %></span>
     </div>
-    <div class="left talk_speed">
-      <div id="normal_speed" class="chip ">×1.0</div>
-      <div id="little_high_speed" class="chip ">×1.2</div>
-      <div id="high_speed" class="chip ">×1.5</div>
-    </div>
-    <div class="categories_name right">
-      <div class="chip">
-        <%= link_to @talk.bigcategory.name,category_path(@talk.bigcategory.id) %>
+    <div class="talk_fixer">
+      <div class="left talk_speed">
+        <div id="normal_speed" class="chip ">×1.0</div>
+        <div id="little_high_speed" class="chip ">×1.2</div>
+        <div id="high_speed" class="chip ">×1.5</div>
       </div>
-      <div class="chip">
-        <%= link_to @talk.smallcategory.name,subcategory_path(@talk.smallcategory.id) %>
+      <div class="categories_name right">
+        <div class="chip">
+          <%= link_to @talk.bigcategory.name,category_path(@talk.bigcategory.id) %>
+        </div>
+        <div class="chip">
+          <%= link_to @talk.smallcategory.name,subcategory_path(@talk.smallcategory.id) %>
+        </div>
       </div>
     </div>
     <div class="summary container">

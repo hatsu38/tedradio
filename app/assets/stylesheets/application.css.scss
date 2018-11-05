@@ -331,6 +331,9 @@ footer{
     line-height:.5rem;
     margin-left:1rem;
   }
+  .talk_detail_info{
+    margin:.15rem 1rem;
+  }
   .summary{
     clear:both;
   }
@@ -345,6 +348,10 @@ footer{
     font-size:1.03rem;
   }
 }
+.talk_fixer{
+  width:97%;
+  margin:0 auto;
+}
 .categories_name,.talk_speed{
   .chip{
     font-size:.8rem;
@@ -358,10 +365,13 @@ footer{
     }
   }
   .talk_speed{
+    margin-left:1rem;
     .active{
       background-color:rgba(255,0,0,.7);
       color:#fff;
     }
+  }
+  .categories_name{
   }
 }
 #relation_talk,#relation_category{

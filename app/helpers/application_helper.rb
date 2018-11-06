@@ -15,7 +15,7 @@ module ApplicationHelper
         description: 'TEDRadioは、外国語のTEDでも日本語音声で聞けるTED日本語音声メディアです。字幕を見るために目が離せなくなっていたTEDも、楽に聞けるようになりました。有名TEDを是非日本語で聞いてみてください！',
         type: 'website',
         url: request.original_url,
-        # image: image_url("ogp_img.png"),
+        image: request.original_url+"tedradio_ogp.png",
         locale: 'ja_JP',
       },
       twitter: {

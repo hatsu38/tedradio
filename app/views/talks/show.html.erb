@@ -1,4 +1,4 @@
-<% set_meta_tags title: @talk.speaker.name + "の話す" + @talk.title ,  og: { title: @talk.speaker.name + "の話す" + @talk.title,image: @talk.thumbnail,type: "article"},twitter:{title: @talk.speaker.name + "の話す" + @talk.title ,image: @talk.thumbnail} %>
+<% set_meta_tags title: @talk.speaker.name + "の話す" + @talk.title, description: @talk.summary,  og: { title: @talk.speaker.name + "の話す" + @talk.title, description: @talk.summary,image: @talk.thumbnail,type: "article"},twitter:{title: @talk.speaker.name + "の話す" + @talk.title , description: @talk.summary,image: @talk.thumbnail} %>
 
 <div class="shadow_section">
   <section id="show" class="section_block">

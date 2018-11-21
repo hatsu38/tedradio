@@ -1,24 +1,6 @@
-# README
+# TEDRADIO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![demo](https://raw.githubusercontent.com/wiki/toywonder/tedradio/img/tedradio_demo.gif)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Description
+TEDRadioは、外国語のTEDでも日本語音声で聞けるTED日本語音声メディアです。字幕を見るために目が離せなくなっていたTEDも、楽に聞けるようになりました。有名TEDを是非日本語で聞いてみてください！
